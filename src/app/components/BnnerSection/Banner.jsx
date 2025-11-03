@@ -64,7 +64,7 @@ export default function Banner() {
   }, [currentIndex]);
 
   return (
-    <div className="relative max-w-7xl mx-auto my-5 rounded-3xl overflow-hidden h-[70vh] md:h-[90vh] shadow-xl">
+    <div className="relative max-w-7xl mx-auto my-5 rounded-3xl overflow-hidden h-[50vh] md:h-[90vh] shadow-xl">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -82,7 +82,7 @@ export default function Banner() {
           />
 
           {/* Animated Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent animate-gradient-move"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent animate-gradient-move"></div>
 
           {/* Animated Text */}
           <div
@@ -92,13 +92,13 @@ export default function Banner() {
                 : "-translate-x-10 opacity-0"
             }`}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-6xl font-extrabold mb-4 drop-shadow-lg animate-fade-in">
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-extrabold mb-4 drop-shadow-lg animate-fade-in">
               {slide.title}
             </h2>
-            <p className="text-lg md:text-2xl mb-6 max-w-2xl drop-shadow-md animate-fade-in-delay">
+            <p className=" md:text-2xl mb-6 max-w-2xl drop-shadow-md animate-fade-in-delay">
               {slide.desc}
             </p>
-            <button className="bg-red-500 w-fit hover:bg-red-600 px-8 py-3  rounded-md lg:text-lg font-semibold transition animate-fade-in-delay-2">
+            <button className="bg-red-500 w-fit btn btn-outline btn-xs md:btn-md hover:bg-red-600 px-8 py-3  rounded-md lg:text-lg font-semibold transition animate-fade-in-delay-2">
               {slide.btnText}
             </button>
           </div>

@@ -7,7 +7,7 @@ export default function AboutUs() {
       {/* Left Images */}
       <div className="flex-1 flex flex-col gap-6 relative">
         {/* Top Image */}
-        <div className="relative  w-80 mr-20 md:w-10/12 lg:w-10/12 h-80 lg:h-[400px] rounded-lg overflow-hidden">
+        <div className="relative  w-80 mr-16 md:w-10/12 lg:w-10/12 h-80 lg:h-[400px] rounded-lg overflow-hidden">
           <Image
             src="/images/about_us/person.jpg"
             alt="Person"
@@ -18,7 +18,7 @@ export default function AboutUs() {
         </div>
 
         {/* Bottom Image */}
-        <div className="h-60 w-72 lg:h-[300px] rounded-lg overflow-hidden border-10 border-white absolute top-40 left-28 md:left-40  md:w-7/12 lg:w-3/4 ">
+        <div className="h-60 w-72 lg:h-[300px] rounded-lg overflow-hidden border-10 border-white absolute top-40 left-24 md:left-40  md:w-7/12 lg:w-3/4 ">
           <Image
             src="/images/about_us/parts.jpg"
             alt="Parts"

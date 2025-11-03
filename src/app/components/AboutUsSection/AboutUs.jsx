@@ -35,12 +35,12 @@ export default function AboutUs() {
         <h1 className="text-4xl md:text-2xl lg:text-5xl font-bold leading-snug">
           We are qualified & of experience in this field
         </h1>
-        <p className="text-gray-700 md:text-xs lg:text-base">
+        <p className="text-gray-500 md:text-xs lg:text-base">
           There are many variations of passages of Lorem Ipsum available, but
           the majority have suffered alteration in some form, by injected humour,
           or randomised words which look even slightly believable.
         </p>
-        <p className="text-gray-700 md:text-xs lg:text-base">
+        <p className="text-gray-500 md:text-xs lg:text-base">
           The majority have suffered alteration in some form, by injected humour,
           or randomised words which look even slightly believable.
         </p>

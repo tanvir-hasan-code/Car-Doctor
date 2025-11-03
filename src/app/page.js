@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Banner from "./components/BnnerSection/Banner";
 import AboutUs from "./components/AboutUsSection/AboutUs";
+import OurService from "./components/ServiceSection/OurService";
 
 export const metadata = {
   title: "Home",
@@ -11,8 +12,9 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <AboutUs/>
-    <h1> Hello World</h1>
+      <AboutUs />
+      <OurService/>
+    
     </>
   );
 }

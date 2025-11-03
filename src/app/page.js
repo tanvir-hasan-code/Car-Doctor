@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Banner from "./components/BnnerSection/Banner";
+import AboutUs from "./components/AboutUsSection/AboutUs";
 
 export const metadata = {
   title: "Home",
@@ -9,7 +10,8 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-    <Banner/>
+      <Banner />
+      <AboutUs/>
     <h1> Hello World</h1>
     </>
   );

@@ -2,6 +2,7 @@
 import { collectionNames } from "@/lib/CollectionNames";
 import DatabaseConnect from "@/lib/DatabaseConnect";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default async function OurService() {
@@ -216,7 +217,7 @@ export default async function OurService() {
 					  <div key={item?._id} className="border rounded-2xl p-6 shadow-lg border-gray-400 transform transition-transform duration-500 ease-in-out hover:scale-110">
 						  <Image className="object-cover rounded-2xl h-48 mx-auto" src={item.img} width={350} height={210} alt={item.title}/>
 						  <h1 className="text-gray-800 text-2xl my-2 font-bold">{item?.title}</h1>
-						  <p className="text-red-600 font-bold text-lg flex justify-between">Price: ${item.price} <span><button className="text-xl text-red-700">➤</button></span></p>
+						  <p className="text-red-600 font-bold text-lg flex justify-between">Price: ${item.price} <span><Link href={`/services/${item._id}`} className="btn text-xl rounded-2xl text-orange-500 btn-outline">➤</Link></span></p>
 						  
 				</div>
 			)

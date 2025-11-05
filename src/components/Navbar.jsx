@@ -61,6 +61,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end">
+        <Link href={"/login"} className="text-blue-500 btn  mr-3 ">Login</Link>
         <a className="btn btn-outline text-orange-600">Appointment</a>
       </div>
     </div>

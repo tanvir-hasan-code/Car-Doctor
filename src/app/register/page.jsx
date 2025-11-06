@@ -4,8 +4,12 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link';
 import GoogleLogin from '../login/components/GoogleLogin';
+import { UserRegister } from '../actions/auth/UserRegister';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function RegisterPage() {
+	const router = useRouter();
 
 	const handleRegisterForm = async (e) => {
 		e.preventDefault();
@@ -14,7 +18,14 @@ export default function RegisterPage() {
 		const email = form.email.value;
 		const password = form.password.value;
 		const payload = {name, email, password };
-		
+		const result = await UserRegister(payload);
+		if (result?.insertedId) {
+			form.reset();
+			router.push("/")
+			toast.success("Register Successfully!")
+		} else {
+			toast.error("Register Failed!")
+		}
 	}
 
   return (
@@ -42,7 +53,7 @@ export default function RegisterPage() {
 				  </div>
 				  <div className='flex'>
 					  <button type='reset' className='btn flex-1 btn-error text-white'>Reset</button>
-					  <button type="submit" className='btn flex-1  text-white bg-orange-500'>Sign In</button>
+					  <button type="submit" className='btn flex-1  text-white bg-orange-500'>Register</button>
 				  </div>
 					<p className='text-center text-gray-500'>Or Sign In with</p>
 

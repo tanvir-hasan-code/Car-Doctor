@@ -1,0 +1,165 @@
+"use client";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+
+export default function BookingForm({ data }) {
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    toast.loading("Submitting your order...", { id: "order-toast" });
+
+    const form = e.target;
+    const payload = {
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      date: form.date.value,
+      due: form.due.value,
+      address: form.address.value,
+      service_id: data._id,
+      service_name: data.title,
+      service_price: data.price,
+      service_image: data.img,
+    };
+
+    try {
+      const response = await fetch("/api/services", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      if (result.insertedId) {
+        toast.success("✅ Order Confirmed Successfully!", { id: "order-toast" });
+        form.reset();
+      } else {
+        toast.error("Something went wrong. Please try again.", { id: "order-toast" });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to submit order!", { id: "order-toast" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-linear-to-br from-orange-50 via-white to-orange-100 p-6">
+      <div className="w-full max-w-4xl bg-base-100 shadow-lg border border-orange-100 rounded-2xl p-10">
+        <h2 className="text-3xl font-bold text-center text-orange-600 mb-10">
+          🧾 Order Information Form
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-10 mt-10">
+          {/* Input Fields */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Name */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                defaultValue={session?.user?.name}
+                readOnly
+                required
+                className="input input-bordered w-full h-12 rounded-lg"
+              />
+            </div>
+
+            {/* Email */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                defaultValue={session?.user?.email}
+                readOnly
+                required
+                className="input input-bordered w-full h-12 rounded-lg"
+              />
+            </div>
+
+            {/* Phone */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Phone</span>
+              </label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="Enter your phone number"
+                required
+                className="input input-bordered w-full h-12 rounded-lg"
+              />
+            </div>
+
+            {/* Date */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Date</span>
+              </label>
+              <input
+                type="date"
+                name="date"
+                required
+                className="input input-bordered w-full h-12 rounded-lg"
+              />
+            </div>
+
+            {/* Due */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Due</span>
+              </label>
+              <input
+                type="number"
+                name="due"
+                defaultValue={data?.price}
+                readOnly
+                required
+                className="input input-bordered w-full h-12 rounded-lg"
+              />
+            </div>
+
+            {/* Present Address */}
+            <div className="form-control md:col-span-2">
+              <label className="label">
+                <span className="label-text font-semibold text-gray-700">Present Address</span>
+              </label>
+              <textarea
+                name="address"
+                placeholder="Enter your present address"
+                required
+                className="textarea textarea-bordered w-full h-24 rounded-lg resize-none"
+              ></textarea>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`btn w-full h-14 text-lg font-semibold text-white rounded-lg shadow-md transition-all duration-300 ${
+                loading
+                  ? "bg-orange-300 cursor-not-allowed"
+                  : "bg-orange-500 hover:bg-orange-600"
+              }`}
+            >
+              {loading ? "Submitting..." : "Confirm Order"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}

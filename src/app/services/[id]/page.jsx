@@ -4,13 +4,15 @@ import DatabaseConnect from '@/lib/DatabaseConnect';
 import { ObjectId } from 'mongodb';
 import Image from 'next/image';
 import React from 'react'
+import Link from "next/link";
 
 export default async function ServicesDetailsPage({params}) {
 	const p = await params;
 	const id = await p.id;
-	const filter = {_id: new ObjectId(id)}
-	const serviceResponse = DatabaseConnect(collectionNames.OUR_SERVICES);
-	const data = await serviceResponse.findOne(filter);
+
+	const response = await fetch(`http://localhost:3000/api/services/${id}`);
+	const data = await response.json();
+
 
 	return (<>
 	<section className=' max-w-7xl mx-auto my-6'>
@@ -71,8 +73,12 @@ export default async function ServicesDetailsPage({params}) {
 							<FaArrowRight/>
 						</div>
 					</div>
+					<div className="p-8 rounded-2xl bg-gray-200 mt-5 space-y-2">
+						<p className="font-bold text-3xl">Price: ${data?.price}</p>
+						<Link href={`/checkout/${id}`}><button className="btn btn-dash bg-orange-500 text-white w-full">CheckOut</button></Link>
+					</div>
 				</div>
-		{/* Sideber */}
+		{/* Sidebar */}
 			</div>
 		  
 			

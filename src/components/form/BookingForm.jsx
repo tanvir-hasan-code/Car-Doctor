@@ -35,7 +35,7 @@ export default function BookingForm({ data }) {
 
       const result = await response.json();
       if (result.insertedId) {
-        toast.success("✅ Order Confirmed Successfully!", { id: "order-toast" });
+        toast.success("Order Confirmed Successfully!", { id: "order-toast" });
         form.reset();
       } else {
         toast.error("Something went wrong. Please try again.", { id: "order-toast" });

@@ -1,6 +1,7 @@
 "use client";
 import DeleteBookingButton from "@/app/my-bookings/components/DeleteBookingButton";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaEdit } from "react-icons/fa";
 
@@ -74,12 +75,13 @@ export default function MyBookingTable({ bookings }) {
 
                 {/* Actions */}
                 <td className="text-center flex justify-center">
+                  <Link href={`/my-bookings/${item._id}`}>
                   <button
-                    onClick={() => handleUpdate(item._id)}
                     className="btn btn-sm bg-orange-400 hover:bg-orange-500 text-white mr-2"
-                  >
+                    >
                     <FaEdit />
                   </button>
+                    </Link>
                   <DeleteBookingButton id={item._id} />
                 </td>
               </tr>

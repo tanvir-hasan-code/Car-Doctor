@@ -4,17 +4,15 @@ import { headers } from "next/headers";
 import React from "react";
 
 const fetchMyData = async () => {
-	const header = await headers();
-	const res = await fetch("http://localhost:3000/api/services", {
-	  headers: header,
+  const res = await fetch("https://car-doctor-flax.vercel.app/api/services", {
+    headers: new Headers(await headers()),
   });
   const d = await res.json();
   return d;
 };
 
 export default async function MyBookingsPage() {
-
-	const data = await fetchMyData();
+  const data = await fetchMyData();
 
   // const [data, setData] = useState([]);
   // const [loading, setLoading] = useState(false)
@@ -26,7 +24,7 @@ export default async function MyBookingsPage() {
 
   return (
     <div>
-      <MyBookingTable  bookings={data} />
+      <MyBookingTable bookings={data} />
     </div>
   );
 }
